@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('CustomerFirstName');
             $table->string('CustomerLastName');
             $table->string('CustomerPhone');
-            $table->email('CustomerEmail');
+            $table->string('CustomerEmail');
             $table->date('OrderDate');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
