@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('LastName');
             $table->integer('age');
             $table->date('StartWork');
-            $table->string('EmpiloyeeImage');
+            $table->string('EmployeeImage');
             $table->integer('Evalute');
             $table->timestamps();
         });
