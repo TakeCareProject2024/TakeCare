@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('companyName');
             $table->string('description');
             $table->string('services');
-            $table->email('Email');
+            $table->string('Email')->unique();
             $table->string('phone1');
             $table->string('phone2');
             $table->string('Address');
