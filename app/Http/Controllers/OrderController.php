@@ -24,7 +24,18 @@ class OrderController extends Controller
         ]);
 
         // Create a new order record
-        $order = Order::create($request->all());
+        $order = Order::create([
+            'CustomerFirstName' => $request->input('CustomerFirstName'),
+            'CustomerLastName' => $request->input('CustomerLastName'),
+            'CustomerPhone' => $request->input('CustomerPhone'),
+            'CustomerEmail' => $request->input('CustomerEmail'),
+            'OrderDate' => $request->input('OrderDate'),
+            'start_time' => $request->input('start_time'),
+            'end_time' => $request->input('end_time'),
+            'EmployeeNumber' => $request->input('EmployeeNumber'),
+            'Evalute' => $request->input('Evalute'),
+            'OrderState' => $request->input('OrderState'),
+        ]);
 
         return response()->json([
             'message' => 'Order created successfully',
