@@ -20,7 +20,7 @@ class CompanyController extends Controller
             'Address' => 'required|string',
         ]);
 
-        $company = Company::create($request->all());
+        $company = company::create($request->all());
 
         return response()->json([
             'message' => 'Company created successfully.',
@@ -42,7 +42,7 @@ class CompanyController extends Controller
     // Get a single company by ID
     public function show($id)
     {
-        $company = Company::find($id);
+        $company = company::find($id);
 
         if (!$company) {
             return response()->json(['message' => 'Company not found.'], 404);
@@ -67,7 +67,7 @@ class CompanyController extends Controller
             'Address' => 'nullable|string',
         ]);
 
-        $company = Company::find($id);
+        $company = company::find($id);
 
         if (!$company) {
             return response()->json(['message' => 'Company not found.'], 404);
@@ -84,7 +84,7 @@ class CompanyController extends Controller
     // Delete a company
     public function destroy($id)
     {
-        $company = Company::find($id);
+        $company = company::find($id);
 
         if (!$company) {
             return response()->json(['message' => 'Company not found.'], 404);
