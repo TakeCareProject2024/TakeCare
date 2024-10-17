@@ -19,8 +19,7 @@ class EmployeeController extends Controller
             'Evalute' => 'required|integer',
         ]);
 
-        // Store the employee image
-        $imagePath = $request->file('EmployeeImage')->store('employees', 'public');
+
 
         // Create a new employee record
         $employee = Employee::create([
@@ -28,7 +27,7 @@ class EmployeeController extends Controller
             'LastName' => $request->LastName,
             'age' => $request->age,
             'StartWork' => $request->StartWork,
-            'EmployeeImage' => $imagePath,
+            'EmployeeImage' => $request->EmployeeImage,
             'Evalute' => $request->Evalute,
         ]);
 
