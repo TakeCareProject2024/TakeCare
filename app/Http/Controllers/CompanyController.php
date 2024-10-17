@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use App\Models\company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -31,7 +31,7 @@ class CompanyController extends Controller
     // Get all companies
     public function index()
     {
-        $companies = Company::all();
+        $companies = company::all();
 
         return response()->json([
             'message' => 'Companies retrieved successfully.',
