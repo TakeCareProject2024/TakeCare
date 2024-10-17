@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
     // Create a new order
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'CustomerFirstName' => 'required|string|max:255',
             'CustomerLastName' => 'required|string|max:255',
             'CustomerPhone' => 'required|string|max:15',
@@ -22,25 +23,20 @@ class OrderController extends Controller
             'Evalute' => 'required|integer',
             'OrderState' => 'required|in:pending,processing,completed,cancelled',
         ]);
-
-        // Create a new order record
-        $order = Order::create([
-            'CustomerFirstName' => $request->input('CustomerFirstName'),
-            'CustomerLastName' => $request->input('CustomerLastName'),
-            'CustomerPhone' => $request->input('CustomerPhone'),
-            'CustomerEmail' => $request->input('CustomerEmail'),
-            'OrderDate' => $request->input('OrderDate'),
-            'start_time' => $request->input('start_time'),
-            'end_time' => $request->input('end_time'),
-            'EmployeeNumber' => $request->input('EmployeeNumber'),
-            'Evalute' => $request->input('Evalute'),
-            'OrderState' => $request->input('OrderState'),
-        ]);
-
-        return response()->json([
-            'message' => 'Order created successfully',
-            'data' => $order,
-        ], 201);
+        
+        
+        if ($validator->fails()) {
+            
+            return response()->json([
+                'errors' => $validator->errors(),
+                'message' => 'Validation failed'
+            ], 400); 
+        }
+        
+        
+        $order = Order::create($validator->validated());
+        
+        return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
     }
 
     // Get all orders
