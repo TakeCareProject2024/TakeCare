@@ -30,3 +30,5 @@ Route::prefix('orders')->group(function () {
     Route::put('{id}', [OrderController::class, 'update']); // Update a specific order
     Route::delete('{id}', [OrderController::class, 'destroy']); // Delete a specific order
 });
+
+Route::post('/order',[OrderController::class,'store'])->name('AddOrder');
