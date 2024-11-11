@@ -110,10 +110,10 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
 
-        if ($employee->EmployeeImage && Storage::disk('public')->exists($employee->EmployeeImage)) {
-            Storage::disk('public')->delete($employee->EmployeeImage);
+        $imagePath = public_path($employee->EmployeeImage);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
         }
-
         $employee->delete();
 
         return response()->json([
