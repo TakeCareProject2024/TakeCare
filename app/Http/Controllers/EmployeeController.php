@@ -67,7 +67,7 @@ class EmployeeController extends Controller
     // Update a specific employee
         public function update(Request $request, $id)
     {
-        dd($request->all());
+       
         $request->validate([
             'FirstName' => 'sometimes|required|string|max:255',
             'LastName' => 'sometimes|required|string|max:255',
