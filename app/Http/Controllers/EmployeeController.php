@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class EmployeeController extends Controller
 {
@@ -15,29 +17,32 @@ class EmployeeController extends Controller
             'LastName' => 'required|string|max:255',
             'age' => 'required|integer|min:18',
             'StartWork' => 'required|date',
-            'EmployeeImage' => 'required|string',
+            'EmployeeImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'Evalute' => 'required|integer',
         ]);
-
-
-
-        // Create a new employee record
+    
+        
+        $imagePath = null;
+        if ($request->hasFile('EmployeeImage')) {
+            $imagePath = $request->file('EmployeeImage')->store('images', 'public');
+        }
+    
         $employee = Employee::create([
             'FirstName' => $request->FirstName,
             'LastName' => $request->LastName,
             'age' => $request->age,
             'StartWork' => $request->StartWork,
-            'EmployeeImage' => $request->EmployeeImage,
+            'EmployeeImage' => $imagePath ? 'storage/' . $imagePath : null,
             'Evalute' => $request->Evalute,
         ]);
-
+    
         return response()->json([
             'message' => 'Employee created successfully',
             'data' => $employee,
         ], 201);
     }
+    
 
-    // Get all employees
     public function index()
     {
         $employees = Employee::all();
