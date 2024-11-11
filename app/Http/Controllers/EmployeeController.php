@@ -67,6 +67,7 @@ class EmployeeController extends Controller
     // Update a specific employee
         public function update(Request $request, $id)
     {
+        dd($request->all());
         $request->validate([
             'FirstName' => 'sometimes|required|string|max:255',
             'LastName' => 'sometimes|required|string|max:255',
@@ -86,7 +87,7 @@ class EmployeeController extends Controller
             $imagePath = $request->file('EmployeeImage')->store('images', 'public');
             $employee->EmployeeImage = $imagePath;
         }
-
+        $employee->FirstName=$request->FirstName;
         $employee->update($request->only('FirstName', 'LastName', 'age', 'StartWork', 'Evalute'));
         $employee->save();
         return response()->json([
