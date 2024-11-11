@@ -85,10 +85,11 @@ class EmployeeController extends Controller
 
         $imagePath = $request->file('EmployeeImage')->store('images', 'public');
         $employee->EmployeeImage = $imagePath;
+        $employee->save();
     }
 
     $employee->update($request->only('FirstName', 'LastName', 'age', 'StartWork', 'Evalute'));
-
+    $employee->save();
     return response()->json([
         'message' => 'Employee updated successfully',
         'data' => $employee,
