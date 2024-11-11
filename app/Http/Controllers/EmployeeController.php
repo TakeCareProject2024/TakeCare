@@ -65,35 +65,35 @@ class EmployeeController extends Controller
     }
 
     // Update a specific employee
-    public function update(Request $request, $id)
-{
-    $request->validate([
-        'FirstName' => 'sometimes|required|string|max:255',
-        'LastName' => 'sometimes|required|string|max:255',
-        'age' => 'sometimes|required|integer|min:18',
-        'StartWork' => 'sometimes|required|date',
-        'EmployeeImage' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'Evalute' => 'sometimes|required|integer',
-    ]);
+        public function update(Request $request, $id)
+    {
+        $request->validate([
+            'FirstName' => 'sometimes|required|string|max:255',
+            'LastName' => 'sometimes|required|string|max:255',
+            'age' => 'sometimes|required|integer|min:18',
+            'StartWork' => 'sometimes|required|date',
+            'EmployeeImage' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Evalute' => 'sometimes|required|integer',
+        ]);
 
-    $employee = Employee::findOrFail($id);
+        $employee = Employee::findOrFail($id);
 
-    if ($request->hasFile('EmployeeImage')) {
-        if ($employee->EmployeeImage && Storage::disk('public')->exists($employee->EmployeeImage)) {
-            Storage::disk('public')->delete($employee->EmployeeImage);
+        if ($request->hasFile('EmployeeImage')) {
+            if ($employee->EmployeeImage && Storage::disk('public')->exists($employee->EmployeeImage)) {
+                Storage::disk('public')->delete($employee->EmployeeImage);
+            }
+
+            $imagePath = $request->file('EmployeeImage')->store('images', 'public');
+            $employee->EmployeeImage = $imagePath;
         }
 
-        $imagePath = $request->file('EmployeeImage')->store('images', 'public');
-        $employee->EmployeeImage = $imagePath;
+        $employee->update($request->only('FirstName', 'LastName', 'age', 'StartWork', 'Evalute'));
+        $employee->save();
+        return response()->json([
+            'message' => 'Employee updated successfully',
+            'data' => $employee,
+        ]);
     }
-
-    $employee->update($request->only('FirstName', 'LastName', 'age', 'StartWork', 'Evalute'));
-    $employee->save();
-    return response()->json([
-        'message' => 'Employee updated successfully',
-        'data' => $employee,
-    ]);
-}
 
 
     // Delete a specific employee
