@@ -65,46 +65,60 @@ class EmployeeController extends Controller
     }
 
     // Update a specific employee
-        public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
-       
         $request->validate([
             'FirstName' => 'required|string|max:255',
             'LastName' => 'required|string|max:255',
             'age' => 'required|integer|min:18',
-            'StartWork' => 'sometimes|required|date',
-            'EmployeeImage' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Evalute' => 'sometimes|required|integer',
+            'StartWork' => 'nullable|date', 
+            'EmployeeImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Evalute' => 'required|integer',
         ]);
-
-        $employee = Employee::findOrFail($id);
-
+    
+        $employee = Employee::find($id);
+        if (!$employee) {
+            return response()->json(['message' => 'Employee not found'], 404);
+        }
+    
         if ($request->hasFile('EmployeeImage')) {
             if ($employee->EmployeeImage && Storage::disk('public')->exists($employee->EmployeeImage)) {
                 Storage::disk('public')->delete($employee->EmployeeImage);
             }
-
+    
             $imagePath = $request->file('EmployeeImage')->store('images', 'public');
             $employee->EmployeeImage = $imagePath;
         }
-        $employee->FirstName=$request->FirstName;
-        $employee->update($request->only('FirstName', 'LastName', 'age', 'StartWork', 'Evalute'));
+    
+        $employee->FirstName = $request->FirstName;
+        $employee->LastName = $request->LastName;
+        $employee->age = $request->age;
+        $employee->StartWork = $request->StartWork;
+        $employee->Evalute = $request->Evalute;
         $employee->save();
+    
         return response()->json([
             'message' => 'Employee updated successfully',
             'data' => $employee,
         ]);
     }
+    
 
 
     // Delete a specific employee
-    public function destroy($id)
+        public function destroy($id)
     {
         $employee = Employee::findOrFail($id);
+
+        if ($employee->EmployeeImage && Storage::disk('public')->exists($employee->EmployeeImage)) {
+            Storage::disk('public')->delete($employee->EmployeeImage);
+        }
+
         $employee->delete();
 
         return response()->json([
             'message' => 'Employee deleted successfully',
         ]);
     }
+
 }
