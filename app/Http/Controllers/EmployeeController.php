@@ -69,9 +69,9 @@ class EmployeeController extends Controller
     {
        
         $request->validate([
-            'FirstName' => 'sometimes|required|string|max:255',
-            'LastName' => 'sometimes|required|string|max:255',
-            'age' => 'sometimes|required|integer|min:18',
+            'FirstName' => 'required|string|max:255',
+            'LastName' => 'required|string|max:255',
+            'age' => 'required|integer|min:18',
             'StartWork' => 'sometimes|required|date',
             'EmployeeImage' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'Evalute' => 'sometimes|required|integer',
