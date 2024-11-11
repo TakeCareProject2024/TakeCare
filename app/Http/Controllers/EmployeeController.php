@@ -72,7 +72,7 @@ class EmployeeController extends Controller
         'LastName' => 'sometimes|required|string|max:255',
         'age' => 'sometimes|required|integer|min:18',
         'StartWork' => 'sometimes|required|date',
-        'EmployeeImage' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048', // تعديل هذا الحقل للتحقق من نوع الصورة
+        'EmployeeImage' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif|max:2048',
         'Evalute' => 'sometimes|required|integer',
     ]);
 
@@ -85,7 +85,6 @@ class EmployeeController extends Controller
 
         $imagePath = $request->file('EmployeeImage')->store('images', 'public');
         $employee->EmployeeImage = $imagePath;
-        $employee->save();
     }
 
     $employee->update($request->only('FirstName', 'LastName', 'age', 'StartWork', 'Evalute'));
