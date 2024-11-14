@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('EmployeeNumber');
             $table->integer('Evalute');
             $table->enum('OrderState',['pending', 'processing', 'completed', 'cancelled']);
+            $table->decimal('Lat', 10, 6);  
+            $table->decimal('Lang', 10, 6); 
             $table->timestamps();
         });
     }
