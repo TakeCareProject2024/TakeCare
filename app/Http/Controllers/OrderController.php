@@ -22,6 +22,8 @@ class OrderController extends Controller
             'EmployeeNumber' => 'required|integer',
             'Evalute' => 'required|integer',
             'OrderState' => 'required|in:pending,processing,completed,cancelled',
+            'Lat' => 'required|numeric',
+            'Lang' => 'required|numeric',
         ]);
         
         
@@ -75,6 +77,8 @@ class OrderController extends Controller
             'EmployeeNumber' => 'sometimes|required|integer',
             'Evalute' => 'sometimes|required|integer',
             'OrderState' => 'sometimes|required|in:pending,processing,completed,cancelled',
+            'Lat' => 'required|numeric',
+            'Lang' => 'required|numeric',
         ]);
 
         $order = Order::findOrFail($id);

@@ -20,5 +20,7 @@ class Order extends Model
         'EmployeeNumber',
         'Evalute',
         'OrderState',
+        'Lat',
+        'Lang'
     ];
 }
