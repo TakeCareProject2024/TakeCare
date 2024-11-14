@@ -18,6 +18,9 @@ class CompanyController extends Controller
             'phone1' => 'required|string|max:20',
             'phone2' => 'nullable|string|max:20',
             'Address' => 'required|string',
+            'Lat' => 'required|numeric',
+            'Lang' => 'required|numeric',
+            'comments' => 'nullable|string|max:1000'
         ]);
 
         $company = company::create($request->all());
@@ -65,6 +68,9 @@ class CompanyController extends Controller
             'phone1' => 'nullable|string|max:20',
             'phone2' => 'nullable|string|max:20',
             'Address' => 'nullable|string',
+            'Lat' => 'required|numeric',
+            'Lang' => 'required|numeric',
+            'comments' => 'nullable|string|max:1000'
         ]);
 
         $company = company::find($id);

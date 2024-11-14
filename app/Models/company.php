@@ -17,5 +17,8 @@ class company extends Model
         'phone1',
         'phone2',
         'Address',
+        'Lat',
+        'Lang',
+        'comments'
     ];
 }
