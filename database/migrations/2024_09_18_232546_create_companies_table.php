@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('phone1');
             $table->string('phone2');
             $table->string('Address');
+            $table->decimal('Lat', 10, 6);  
+            $table->decimal('Lang', 10, 6); 
+            $table->text('comments'); 
             $table->timestamps();
         });
     }
