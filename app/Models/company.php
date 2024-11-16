@@ -19,6 +19,7 @@ class company extends Model
         'Address',
         'Lat',
         'Lang',
-        'comments'
+        'comments',
+        'password'
     ];
 }

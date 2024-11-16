@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('Address');
             $table->decimal('Lat', 10, 6);  
             $table->decimal('Lang', 10, 6); 
+            $table->string('password');
             $table->text('comments'); 
             $table->timestamps();
         });

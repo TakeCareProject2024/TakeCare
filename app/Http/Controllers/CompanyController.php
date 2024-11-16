@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
 {
@@ -20,10 +21,23 @@ class CompanyController extends Controller
             'Address' => 'required|string',
             'Lat' => 'required|numeric',
             'Lang' => 'required|numeric',
-            'comments' => 'nullable|string|max:1000'
+            'comments' => 'nullable|string|max:1000',
+            'password'=>'required|string'
         ]);
 
-        $company = company::create($request->all());
+        $company = company::create([
+            'companyName' => $request->companyName,
+            'description' => $request->description,
+            'services' => $request->services,
+            'Email' => $request->Email,
+            'phone1' => $request->phone1,
+            'phone2' => $request->phone2,
+            'Address' => $request->Address,
+            'Lat' => $request->Lat,
+            'Lang' => $request->Lang,
+            'comments' => $request->comments,
+            'password' => Hash::make($request->password) 
+        ]);
 
         return response()->json([
             'message' => 'Company created successfully.',
@@ -70,7 +84,8 @@ class CompanyController extends Controller
             'Address' => 'nullable|string',
             'Lat' => 'required|numeric',
             'Lang' => 'required|numeric',
-            'comments' => 'nullable|string|max:1000'
+            'comments' => 'nullable|string|max:1000',
+            'password'=>'required|string'
         ]);
 
         $company = company::find($id);
@@ -85,6 +100,33 @@ class CompanyController extends Controller
             'message' => 'Company updated successfully.',
             'data' => $company,
         ]);
+    }
+    public function Login(Request $request)
+    {
+        $request->validate([
+            'Email' => 'required|email', 
+            'password' => 'required|string', 
+        ]);
+
+        
+        $company = company::where('Email', $request->Email)->first();
+
+        if (!$company) {
+            return response()->json([
+                "message" => "Error: email not found"
+            ], 404);
+        }
+
+        
+        if (!Hash::check($request->password, $company->password)) {
+            return response()->json([
+                "message" => "Error: incorrect password"
+            ], 401);
+        }
+        return response()->json([
+            "message" => "Login successful",
+            "data" => $company 
+        ], 200);
     }
 
     // Delete a company
