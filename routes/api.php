@@ -11,7 +11,7 @@ Route::prefix('companies')->group(function () {
     Route::get('{id}', [CompanyController::class, 'show']); // Get a specific company
     Route::put('{id}', [CompanyController::class, 'update']); // Update a specific company
     Route::delete('{id}', [CompanyController::class, 'destroy']); // Delete a specific company
-    Route::post('/login',[CompanyController::class, 'destroy']);//login to admin dashboard
+    Route::post('/login',[CompanyController::class, 'Login']);//login to admin dashboard
 });
 
 // Employee Routes
