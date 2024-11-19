@@ -21,7 +21,7 @@ class company extends Model
         'Lang',
         'comments',
         'password',
-        'whatsAppLink',
+        'facebookLink',
         'instagramLink'
     ];
 }

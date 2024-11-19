@@ -133,23 +133,23 @@ class CompanyController extends Controller
         ], 200);
     }
 
-    public function changeWhatsappLink(Request $request,$id){
+    public function changeFacebookLink(Request $request,$id){
         $validated = $request->validate([
-            'whatsAppLink' => 'required',
+            'facebookLink' => 'required',
         ]);
         $company=company::find($id);
         if(!$company){
             return response()->json(['message'=>'error cannot find company'],404);
             
         }
-        $company->whatsAppLink = $validated['whatsAppLink'];
+        $company->facebookLink = $validated['facebookLink'];
         try{    
         $company->save();
         } catch(\Exception $e){
-            return response()->json(['message' => 'Failed to update WhatsApp Link'], 500);
+            return response()->json(['message' => 'Failed to update facebook Link'], 500);
         }
-        return response()->json(['message'=>'whatsApp Link changed successfully',
-                                'data'=>$company->whatsAppLink],201);
+        return response()->json(['message'=>'facebook Link changed successfully',
+                                'data'=>$company->facebookLink],201);
         
     }
     public function changeinstagramLink(Request $request,$id){

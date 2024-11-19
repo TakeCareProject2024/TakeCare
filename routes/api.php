@@ -12,7 +12,7 @@ Route::prefix('companies')->group(function () {
     Route::put('{id}', [CompanyController::class, 'update']); // Update a specific company
     Route::delete('{id}', [CompanyController::class, 'destroy']); // Delete a specific company
     Route::post('/login',[CompanyController::class, 'Login']);//login to admin dashboard
-    Route::patch('/changeWhatsapp/{id}',[CompanyController::class,'changeWhatsappLink']);
+    Route::patch('/changefacebook/{id}',[CompanyController::class,'changeFacebookLink']);
     Route::patch('/changeinstagram/{id}',[CompanyController::class,'changeinstagramLink']);
 });
 
