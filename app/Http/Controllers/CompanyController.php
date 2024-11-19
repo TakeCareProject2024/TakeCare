@@ -139,7 +139,7 @@ class CompanyController extends Controller
         ]);
         $company=company::find($id);
         if(!$company){
-            return response()->json(['message'=>'error cannot find company',404]);
+            return response()->json(['message'=>'error cannot find company'],404);
             
         }
         $company->whatsAppLink = $validated['whatsAppLink'];
@@ -158,7 +158,7 @@ class CompanyController extends Controller
         ]);
         $company=company::find($id);
         if(!$company){
-            return response()->json(['message'=>'error cannot find company',404]);
+            return response()->json(['message'=>'error cannot find company'],404);
             
         }
         $company->instagramLink = $validated['instagramLink'];
