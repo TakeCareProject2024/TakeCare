@@ -23,7 +23,7 @@ class CompanyController extends Controller
             'Lang' => 'required|numeric',
             'comments' => 'nullable|string|max:1000',
             'password'=>'required|string',
-            'whatsAppLink'=>'required|string',
+            'facebookLink'=>'required|string',
             'instagramLink'=>'required|string'
         ]);
 
@@ -39,7 +39,7 @@ class CompanyController extends Controller
             'Lang' => $request->Lang,
             'comments' => $request->comments,
             'password' => Hash::make($request->password),
-            'whatsAppLink'=>$request->whatsAppLink,
+            'facebookLink'=>$request->facebookLink,
             'instagramLink'=>$request->instagramLink 
         ]);
 
