@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('description');
             $table->text('services');
             $table->string('Email')->unique();
+            $table->string('whatsAppLink')->nullable();
+            $table->string('instagramLink')->nullable();
             $table->string('phone1');
             $table->string('phone2');
             $table->string('Address');

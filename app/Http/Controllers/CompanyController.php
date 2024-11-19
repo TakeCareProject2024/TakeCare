@@ -22,7 +22,9 @@ class CompanyController extends Controller
             'Lat' => 'required|numeric',
             'Lang' => 'required|numeric',
             'comments' => 'nullable|string|max:1000',
-            'password'=>'required|string'
+            'password'=>'required|string',
+            'whatsAppLink'=>'required|string',
+            'instagramLink'=>'required|string'
         ]);
 
         $company = company::create([
@@ -36,7 +38,9 @@ class CompanyController extends Controller
             'Lat' => $request->Lat,
             'Lang' => $request->Lang,
             'comments' => $request->comments,
-            'password' => Hash::make($request->password) 
+            'password' => Hash::make($request->password),
+            'whatsAppLink'=>$request->whatsAppLink,
+            'instagramLink'=>$request->instagramLink 
         ]);
 
         return response()->json([
@@ -129,6 +133,44 @@ class CompanyController extends Controller
         ], 200);
     }
 
+    public function changeWhatsappLink(Request $request,$id){
+        $validated = $request->validate([
+            'whatsAppLink' => 'required',
+        ]);
+        $company=company::find($id);
+        if(!$company){
+            return response()->json(["message"=>"error cannot find company",404]);
+            
+        }
+        $company->whatsAppLink = $validated['whatsAppLink'];
+        try{    
+        $company->save();
+        } catch(\Exception $e){
+            return response()->json(["message" => "Failed to update WhatsApp Link"], 500);
+        }
+        return response()->json(["message"=>"whatsApp Link changed successfully",
+                                "data"=>$company->whatsAppLink],201);
+        
+    }
+    public function changeinstagramLink(Request $request,$id){
+        $validated = $request->validate([
+            'instagramLink' => 'required',
+        ]);
+        $company=company::find($id);
+        if(!$company){
+            return response()->json(["message"=>"error cannot find company",404]);
+            
+        }
+        $company->instagramLink = $validated['instagramLink'];
+        try{    
+        $company->save();
+        } catch(\Exception $e){
+            return response()->json(["message" => "Failed to update instagram Link"], 500);
+        }
+        return response()->json(["message"=>"instagram Link changed successfully",
+                                "data"=>$company->instagramLink],201);
+        
+    }
     // Delete a company
     public function destroy($id)
     {

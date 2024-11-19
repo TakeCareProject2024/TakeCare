@@ -20,6 +20,8 @@ class company extends Model
         'Lat',
         'Lang',
         'comments',
-        'password'
+        'password',
+        'whatsAppLink',
+        'instagramLink'
     ];
 }
