@@ -139,17 +139,17 @@ class CompanyController extends Controller
         ]);
         $company=company::find($id);
         if(!$company){
-            return response()->json(["message"=>"error cannot find company",404]);
+            return response()->json(['message'=>'error cannot find company',404]);
             
         }
         $company->whatsAppLink = $validated['whatsAppLink'];
         try{    
         $company->save();
         } catch(\Exception $e){
-            return response()->json(["message" => "Failed to update WhatsApp Link"], 500);
+            return response()->json(['message' => 'Failed to update WhatsApp Link'], 500);
         }
-        return response()->json(["message"=>"whatsApp Link changed successfully",
-                                "data"=>$company->whatsAppLink],201);
+        return response()->json(['message'=>'whatsApp Link changed successfully',
+                                'data'=>$company->whatsAppLink],201);
         
     }
     public function changeinstagramLink(Request $request,$id){
@@ -158,17 +158,17 @@ class CompanyController extends Controller
         ]);
         $company=company::find($id);
         if(!$company){
-            return response()->json(["message"=>"error cannot find company",404]);
+            return response()->json(['message'=>'error cannot find company',404]);
             
         }
         $company->instagramLink = $validated['instagramLink'];
         try{    
         $company->save();
         } catch(\Exception $e){
-            return response()->json(["message" => "Failed to update instagram Link"], 500);
+            return response()->json(['message' => 'Failed to update instagram Link'], 500);
         }
-        return response()->json(["message"=>"instagram Link changed successfully",
-                                "data"=>$company->instagramLink],201);
+        return response()->json(['message'=>'instagram Link changed successfully',
+                                'data'=>$company->instagramLink],201);
         
     }
     // Delete a company
