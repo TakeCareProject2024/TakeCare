@@ -21,7 +21,6 @@ class EmployeeController extends Controller
             'Evalute' => 'required|integer',
         ]);
     
-        
         $imagePath = null;
         if ($request->hasFile('EmployeeImage')) {
             $imagePath = $request->file('EmployeeImage')->store('images', 'public');
@@ -32,7 +31,7 @@ class EmployeeController extends Controller
             'LastName' => $request->LastName,
             'age' => $request->age,
             'StartWork' => $request->StartWork,
-            'EmployeeImage' => $imagePath ? 'storage/' . $imagePath : null,
+            'EmployeeImage' => $imagePath ? url('storage/' . $imagePath) : null,
             'Evalute' => $request->Evalute,
         ]);
     
@@ -42,7 +41,6 @@ class EmployeeController extends Controller
         ], 201);
     }
     
-
     public function index()
     {
         $employees = Employee::all();
