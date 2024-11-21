@@ -14,6 +14,7 @@ Route::prefix('companies')->group(function () {
     Route::post('/login',[CompanyController::class, 'Login']);//login to admin dashboard
     Route::patch('/changefacebook/{id}',[CompanyController::class,'changeFacebookLink']);
     Route::patch('/changeinstagram/{id}',[CompanyController::class,'changeinstagramLink']);
+    Route::patch('/changePassword',[CompanyController::class,'changePassword']);
 });
 
 // Employee Routes

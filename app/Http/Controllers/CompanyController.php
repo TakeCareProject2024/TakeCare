@@ -123,15 +123,42 @@ class CompanyController extends Controller
 
         
         if (!Hash::check($request->password, $company->password)) {
+            return false;
+        }
+        return true;
+    }
+        public function changePassword(Request $request)
+    {
+        
+        $request->validate([
+            'Email' => 'required|email',
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+            'new_password_confirmation' => 'required|string'
+        ]);
+
+        $company = company::where('Email', $request->Email)->first();
+
+        if (!$company) {
             return response()->json([
-                "message" => "Error: incorrect password"
+                "message" => "Error: email not found"
+            ], 404);
+        }
+        
+        if (!Hash::check($request->current_password, $company->password)) {
+            return response()->json([
+                "message" => "Error: incorrect current password"
             ], 401);
         }
+
+        $company->password = Hash::make($request->new_password);
+        $company->save();
+
         return response()->json([
-            "message" => "Login successful",
-            "data" => $company 
+            "message" => "Password changed successfully"
         ], 200);
     }
+
 
     public function changeFacebookLink(Request $request,$id){
         $validated = $request->validate([
