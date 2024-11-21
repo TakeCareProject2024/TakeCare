@@ -122,7 +122,7 @@ class CompanyController extends Controller
         }
 
         
-        if (!Hash::check($request->password, $company->password)) {
+        if (!(Hash::check($request->password, $company->password))) {
             return false;
         }
         return true;
