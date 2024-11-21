@@ -122,10 +122,15 @@ class CompanyController extends Controller
         }
 
         
-        if (!(Hash::check($request->password, $company->password))) {
-            return false;
+        if (!Hash::check($request->password, $company->password)) {
+            return response()->json([
+                "message" => "Error: incorrect password"
+            ], 401);
         }
-        return true;
+        return response()->json([
+            "message" => "Login successful",
+            "data" => $company 
+        ], 200);
     }
         public function changePassword(Request $request)
     {
