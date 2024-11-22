@@ -13,6 +13,7 @@ class company extends Model
         'companyName',
         'description',
         'services',
+        'Arabicservices',
         'Email',
         'phone1',
         'phone2',

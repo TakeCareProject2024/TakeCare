@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('companyName');
             $table->string('description');
             $table->text('services');
+            $table->text('Arabicservices');
             $table->string('Email')->unique();
             $table->string('facebookLink')->nullable();
             $table->string('instagramLink')->nullable();
