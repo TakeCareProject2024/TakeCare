@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->integer('EmployeeNumber');
+            $table->string('Address');
             $table->integer('Evalute');
             $table->enum('OrderState',['pending', 'processing', 'completed', 'cancelled']);
             $table->decimal('Lat', 10, 6);  

@@ -18,6 +18,7 @@ class Order extends Model
         'start_time',
         'end_time',
         'EmployeeNumber',
+        'Address',
         'Evalute',
         'OrderState',
         'Lat',
