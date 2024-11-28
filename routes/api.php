@@ -5,6 +5,9 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
 
 // Company Routes
+Route::get('/', function () {
+    return response()->json(['message' => 'API is working']);
+});
 Route::prefix('companies')->group(function () {
     Route::get('/', [CompanyController::class, 'index']); // Get all companies
     Route::post('/', [CompanyController::class, 'store']); // Create a new company
