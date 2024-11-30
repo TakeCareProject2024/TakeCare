@@ -17,7 +17,7 @@ class EmployeeController extends Controller
             'LastName' => 'required|string|max:255',
             'age' => 'required|integer|min:18',
             'StartWork' => 'required|date',
-            'EmployeeImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'EmployeeImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'Evalute' => 'required|integer',
         ]);
     
