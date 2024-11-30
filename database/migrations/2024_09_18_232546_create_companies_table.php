@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');
             $table->text('services');
             $table->text('Arabicservices');
+            $table->text('Arabicdescription');
             $table->string('Email')->unique();
             $table->string('facebookLink')->nullable();
             $table->string('instagramLink')->nullable();

@@ -25,12 +25,14 @@ class CompanyController extends Controller
             'comments' => 'nullable|string|max:1000',
             'password'=>'required|string',
             'facebookLink'=>'required|string',
-            'instagramLink'=>'required|string'
+            'instagramLink'=>'required|string',
+            'Arabicdescription'=>'nullable'
         ]);
 
         $company = company::create([
             'companyName' => $request->companyName,
             'description' => $request->description,
+            'Arabicdescription' => $request->Arabicdescription,
             'services' => $request->services,
             'Arabicservices'=>$request->Arabicservices,
             'Email' => $request->Email,
@@ -92,7 +94,8 @@ class CompanyController extends Controller
             'Lat' => 'required|numeric',
             'Lang' => 'required|numeric',
             'comments' => 'nullable|string|max:1000',
-            'password'=>'required|string'
+            'password'=>'required|string',
+            'Arabicdescription'=>'nullable'
         ]);
 
         $company = company::find($id);
