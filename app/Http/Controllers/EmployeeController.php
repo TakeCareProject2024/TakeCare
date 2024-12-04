@@ -88,11 +88,21 @@ class EmployeeController extends Controller
             $employee->EmployeeImage = $imagePath;
         }
     
-        $employee->FirstName = $request->FirstName;
-        $employee->LastName = $request->LastName;
-        $employee->age = $request->age;
-        $employee->StartWork = $request->StartWork;
-        $employee->Evalute = $request->Evalute;
+        if ($request->filled('FirstName')) {
+            $employee->FirstName = $request->FirstName;
+        }
+        if ($request->filled('LastName')) {
+            $employee->LastName = $request->LastName;
+        }
+        if ($request->filled('age')) {
+            $employee->age = $request->age;
+        }
+        if ($request->filled('StartWork')) {
+            $employee->StartWork = $request->StartWork;
+        }
+        if ($request->filled('Evalute')) {
+            $employee->Evalute = $request->Evalute;
+        }
         $employee->save();
     
         return response()->json([
