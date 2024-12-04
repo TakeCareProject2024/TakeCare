@@ -66,12 +66,12 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'FirstName' => 'required|string|max:255',
-            'LastName' => 'required|string|max:255',
-            'age' => 'required|integer|min:18',
+            'FirstName' => 'nullable|string|max:255',
+            'LastName' => 'nullable|string|max:255',
+            'age' => 'nullable|integer|min:18',
             'StartWork' => 'nullable|date', 
             'EmployeeImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Evalute' => 'required|integer',
+            'Evalute' => 'nullable|integer',
         ]);
     
         $employee = Employee::find($id);
