@@ -108,8 +108,9 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
 
-        $imagePath = public_path($employee->EmployeeImage);
-        if (file_exists($imagePath)) {
+        //$imagePath = public_path($employee->EmployeeImage);
+        $imagePath = str_replace(url('/'), public_path(), $employee->EmployeeImage);
+        if (file_exists($imagePath) && is_file($imagePath)) {
             unlink($imagePath);
         }
         $employee->delete();
