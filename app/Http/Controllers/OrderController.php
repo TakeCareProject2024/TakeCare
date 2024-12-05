@@ -66,19 +66,19 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'CustomerFirstName' => 'sometimes|required|string|max:255',
-            'CustomerLastName' => 'sometimes|required|string|max:255',
-            'CustomerPhone' => 'sometimes|required|string|max:15',
-            'CustomerEmail' => 'sometimes|required|email|max:255',
-            'OrderDate' => 'sometimes|required|date',
-            'start_time' => 'sometimes|required|date_format:Y-m-d H:i:s',
-            'end_time' => 'sometimes|required|date_format:Y-m-d H:i:s|after:start_time',
-            'EmployeeNumber' => 'sometimes|required|integer',
-            'Address'=>'required|string',
-            'Evalute' => 'sometimes|required|integer',
-            'OrderState' => 'sometimes|required|in:pending,processing,completed,cancelled',
-            'Lat' => 'required|numeric',
-            'Lang' => 'required|numeric',
+            'CustomerFirstName' => 'sometimes|nullable|string|max:255',
+            'CustomerLastName' => 'sometimes|nullable|string|max:255',
+            'CustomerPhone' => 'sometimes|nullable|string|max:15',
+            'CustomerEmail' => 'sometimes|nullable|email|max:255',
+            'OrderDate' => 'sometimes|nullable|date',
+            'start_time' => 'sometimes|nullable|date_format:Y-m-d H:i:s',
+            'end_time' => 'sometimes|nullable|date_format:Y-m-d H:i:s|after:start_time',
+            'EmployeeNumber' => 'sometimes|nullable|integer',
+            'Address'=>'sometimes|nullable|string',
+            'Evalute' => 'sometimes|nullable|integer',
+            'OrderState' => 'sometimes|nullable|in:pending,processing,completed,cancelled',
+            'Lat' => 'sometimes|nullable|numeric',
+            'Lang' => 'sometimes|nullable|numeric',
         ]);
 
         $order = Order::findOrFail($id);
