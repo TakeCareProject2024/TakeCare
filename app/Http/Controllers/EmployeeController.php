@@ -89,7 +89,7 @@ class EmployeeController extends Controller
 
         
         $imagePath = $request->file('EmployeeImage')->store('images', 'public');
-        $employee->EmployeeImage = $imagePath;
+        $employee->EmployeeImage = $imagePath ? url('storage/' . $imagePath) : null;
     }
 
     
