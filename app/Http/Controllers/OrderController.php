@@ -14,15 +14,13 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), [
             'CustomerFirstName' => 'required|string|max:255',
             'CustomerLastName' => 'required|string|max:255',
-            'CustomerPhone' => 'nullable|string|max:15',
+            'CustomerPhone' => 'required|string|max:15',
             'CustomerEmail' => 'nullable|email|max:255',
             'Address'=>'nullable|string',
             'OrderDate' => 'required|date',
             'start_time' => 'required|date_format:Y-m-d H:i:s',
             'end_time' => 'required|date_format:Y-m-d H:i:s|after:start_time',
             'EmployeeNumber' => 'required|integer',
-            'Evalute' => 'required|integer',
-            'OrderState' => 'required|in:pending,processing,completed,cancelled',
             'Lat' => 'required|numeric',
             'Lang' => 'required|numeric',
         ]);
