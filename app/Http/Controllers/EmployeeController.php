@@ -64,52 +64,68 @@ class EmployeeController extends Controller
 
     // Update a specific employee
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'FirstName' => 'nullable|string|max:255',
-            'LastName' => 'nullable|string|max:255',
-            'age' => 'nullable|integer|min:18',
-            'StartWork' => 'nullable|date', 
-            'EmployeeImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'Evalute' => 'nullable|integer',
-        ]);
-    
-        $employee = Employee::find($id);
-        if (!$employee) {
-            return response()->json(['message' => 'Employee not found'], 404);
-        }
-    
-        if ($request->hasFile('EmployeeImage')) {
-            if ($employee->EmployeeImage && Storage::disk('public')->exists($employee->EmployeeImage)) {
-                Storage::disk('public')->delete($employee->EmployeeImage);
-            }
-    
-            $imagePath = $request->file('EmployeeImage')->store('images', 'public');
-            $employee->EmployeeImage = $imagePath;
-        }
-    
-        if ($request->filled('FirstName')) {
-            $employee->FirstName = $request->FirstName;
-        }
-        if ($request->filled('LastName')) {
-            $employee->LastName = $request->LastName;
-        }
-        if ($request->filled('age')) {
-            $employee->age = $request->age;
-        }
-        if ($request->filled('StartWork')) {
-            $employee->StartWork = $request->StartWork;
-        }
-        if ($request->filled('Evalute')) {
-            $employee->Evalute = $request->Evalute;
-        }
-        $employee->save();
-    
-        return response()->json([
-            'message' => 'Employee updated successfully',
-            'data' => $employee,
-        ]);
+{
+    $request->validate([
+        'FirstName' => 'nullable|string|max:255',
+        'LastName' => 'nullable|string|max:255',
+        'age' => 'nullable|integer|min:18',
+        'StartWork' => 'nullable|date',
+        'EmployeeImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'Evalute' => 'nullable|integer',
+    ]);
+
+    $employee = Employee::find($id);
+    if (!$employee) {
+        return response()->json(['message' => 'Employee not found'], 404);
     }
+
+    $imagePath = $employee->EmployeeImage; 
+
+    
+    if ($request->hasFile('EmployeeImage')) {
+        if (!empty($employee->EmployeeImage) && Storage::disk('public')->exists($employee->EmployeeImage)) {
+            Storage::disk('public')->delete($employee->EmployeeImage);
+        }
+
+        
+        $imagePath = $request->file('EmployeeImage')->store('images', 'public');
+        $employee->EmployeeImage = $imagePath;
+    }
+
+    
+    if ($request->filled('FirstName')) {
+        $employee->FirstName = $request->FirstName;
+    }
+    if ($request->filled('LastName')) {
+        $employee->LastName = $request->LastName;
+    }
+    if ($request->filled('age')) {
+        $employee->age = $request->age;
+    }
+    if ($request->filled('StartWork')) {
+        $employee->StartWork = $request->StartWork;
+    }
+    if ($request->filled('Evalute')) {
+        $employee->Evalute = $request->Evalute;
+    }
+
+    $employee->save();
+
+   
+    return response()->json([
+        'message' => 'Employee updated successfully',
+        'data' => [
+            'id' => $employee->id,
+            'FirstName' => $employee->FirstName,
+            'LastName' => $employee->LastName,
+            'age' => $employee->age,
+            'StartWork' => $employee->StartWork,
+            'Evalute' => $employee->Evalute,
+            'EmployeeImage' => $imagePath ? url('storage/' . $imagePath) : null,
+        ],
+    ]);
+}
+
     
 
 
