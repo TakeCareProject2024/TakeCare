@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('CustomerFirstName');
             $table->string('CustomerLastName');
-            $table->string('CustomerPhone');
-            $table->string('CustomerEmail');
+            $table->string('CustomerPhone')->nullable();
+            $table->string('CustomerEmail')->nullable();
             $table->date('OrderDate');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->integer('EmployeeNumber');
-            $table->string('Address');
+            $table->string('Address')->nullable();
             $table->integer('Evalute');
             $table->enum('OrderState',['pending', 'processing', 'completed', 'cancelled']);
             $table->decimal('Lat', 10, 6);  
